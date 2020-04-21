@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { addCard } from "../actions/decks";
 import { connect } from "react-redux";
-import { addQuestionForDeck } from "../utils/API";
+import { addQuestion } from "../utils/API";
 
 class AddQuestion extends React.Component {
   state = {
@@ -17,35 +17,59 @@ class AddQuestion extends React.Component {
     answer: ""
   };
 
+  //   submitQuestion = () => {
+  //     let alert = {};
+  //     const { question, answer } = this.state;
+  //     const { title } = this.props.route.params;
+
+  //     if (question === "") {
+  //       Alert.alert("Mandatory", "Question cannot be empty");
+  //       return;
+  //     }
+  //     if (answer === "") {
+  //       Alert.alert("Mandatory", "Answer cannot be empty");
+  //       return;
+  //     }
+
+  //     const params = { title, questions, question, answer };
+
+  //     this.props.dispatch(addCard(params));
+
+  //     addQuestionForDeck({
+  //       card: { question, answer },
+  //       deckName: title
+  //     });
+
+  //     Alert.alert("Successful", "Question Added Successfully", [
+  //       {
+  //         text: "OK",
+  //         onPress: () => this.props.navigation.goBack()
+  //       }
+  //     ]);
+  //   };
+
   submitQuestion = () => {
-    let alert = {};
     const { question, answer } = this.state;
-    const { title, questions } = this.props.route.params;
 
-    if (question === "") {
-      Alert.alert("Mandatory", "Question cannot be empty");
-      return;
-    }
-    if (answer === "") {
-      Alert.alert("Mandatory", "Answer cannot be empty");
+    if (question.trim() === "" || answer.trim() === "") {
       return;
     }
 
-    const params = { title, questions, question, answer };
+    const { title } = this.props.route.params;
+    const { dispatch } = this.props;
 
-    this.props.dispatch(addCard(params));
-
-    addQuestionForDeck({
+    addQuestion({
       card: { question, answer },
       deckName: title
-    });
-
-    Alert.alert("Successful", "Question Added Successfully", [
-      {
-        text: "OK",
-        onPress: () => this.props.navigation.goBack()
-      }
-    ]);
+    }).then(() =>
+      dispatch(
+        addCard({
+          title,
+          question,
+          answer
+        })
+      )
+    );
   };
 
   render() {
@@ -67,7 +91,7 @@ class AddQuestion extends React.Component {
         />
 
         <TouchableOpacity
-          onPress={this.submitQuestion}
+          onPress={() => this.submitQuestion()}
           style={style.submitButton}
         >
           <Text style={style.submitText}>Submit</Text>
