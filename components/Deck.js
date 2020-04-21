@@ -4,9 +4,10 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 class Deck extends React.Component {
   render() {
-    let { title } = this.props.navigation.state.params;
+    let { title } = this.props.route.params;
     const questions =
       this.props.decks[title] && this.props.decks[title].questions;
+    console.log(this.props.route.params);
 
     return (
       <View style={styles.container}>
@@ -82,14 +83,8 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(state) {
+export default connect(decks => {
   return {
-    decks: state
-  };
-}
-
-export default connect(state => {
-  return {
-    decks: state
+    decks
   };
 })(Deck);
