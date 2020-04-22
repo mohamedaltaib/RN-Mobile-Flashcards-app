@@ -10,43 +10,13 @@ import {
 import { addCard } from "../actions/decks";
 import { connect } from "react-redux";
 import { addQuestion } from "../utils/API";
+import { white, blue, purple } from "../utils/colors";
 
 class AddQuestion extends React.Component {
   state = {
     question: "",
     answer: ""
   };
-
-  //   submitQuestion = () => {
-  //     let alert = {};
-  //     const { question, answer } = this.state;
-  //     const { title } = this.props.route.params;
-
-  //     if (question === "") {
-  //       Alert.alert("Mandatory", "Question cannot be empty");
-  //       return;
-  //     }
-  //     if (answer === "") {
-  //       Alert.alert("Mandatory", "Answer cannot be empty");
-  //       return;
-  //     }
-
-  //     const params = { title, questions, question, answer };
-
-  //     this.props.dispatch(addCard(params));
-
-  //     addQuestionForDeck({
-  //       card: { question, answer },
-  //       deckName: title
-  //     });
-
-  //     Alert.alert("Successful", "Question Added Successfully", [
-  //       {
-  //         text: "OK",
-  //         onPress: () => this.props.navigation.goBack()
-  //       }
-  //     ]);
-  //   };
 
   submitQuestion = () => {
     const { question, answer } = this.state;
@@ -61,15 +31,19 @@ class AddQuestion extends React.Component {
     addQuestion({
       card: { question, answer },
       deckName: title
-    }).then(() =>
+    }).then(() => {
       dispatch(
         addCard({
           title,
           question,
           answer
         })
-      )
-    );
+      );
+      this.setState({
+        question: "",
+        answer: ""
+      });
+    });
   };
 
   render() {
@@ -77,13 +51,13 @@ class AddQuestion extends React.Component {
 
     return (
       <View style={style.container}>
-        <Text>Question is </Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>Question </Text>
         <TextInput
           value={question}
           style={style.input}
           onChangeText={question => this.setState({ question })}
         />
-        <Text>Answer is </Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>Answer </Text>
         <TextInput
           value={answer}
           style={style.input}
@@ -104,25 +78,28 @@ class AddQuestion extends React.Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: white,
     alignItems: "center",
-    paddingTop: 20
+    paddingTop: 50
   },
   input: {
     width: 300,
     height: 56,
     padding: 12,
     borderWidth: 1,
-    borderColor: "#7f7f7f",
+    borderColor: purple,
+    backgroundColor: white,
+    borderRadius: 5,
     margin: 16
   },
   submitButton: {
-    backgroundColor: "#000",
+    backgroundColor: blue,
     padding: 12,
     height: 44
   },
   submitText: {
-    color: "#fff",
-    fontSize: 22,
+    color: white,
+    fontSize: 18,
     textAlign: "center"
   }
 });
