@@ -15,7 +15,7 @@ function Decks({ title, length }) {
         flex: 1,
         flexDirection: "row",
         justifyContent: "space-between",
-        pading: 10
+        padding: 10
       }}
     >
       <Text style={{ fontWeight: "bold" }}>{title}</Text>
@@ -44,7 +44,6 @@ class DeckList extends Component {
         <View
           style={{
             flexDirection: "row",
-            alignItems: "space-between",
             justifyContent: "space-between",
             padding: 15
           }}
@@ -59,8 +58,9 @@ class DeckList extends Component {
               const { title, questions } = decks[deck];
               return (
                 <TouchableOpacity
+                  key={deck}
                   style={{
-                    padding: 10,
+                    paddingLeft: 10,
                     margin: 5,
                     backgroundColor: "#d0c9f122"
                   }}
@@ -70,7 +70,7 @@ class DeckList extends Component {
                     })
                   }
                 >
-                  <Decks key={deck} title={title} length={questions.length} />
+                  <Decks title={title} length={questions.length} />
                 </TouchableOpacity>
               );
             })}

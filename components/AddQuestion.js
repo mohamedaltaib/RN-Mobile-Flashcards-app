@@ -26,7 +26,7 @@ class AddQuestion extends React.Component {
     }
 
     const { title } = this.props.route.params;
-    const { dispatch } = this.props;
+    const { dispatch, navigation } = this.props;
 
     addQuestion({
       card: { question, answer },
@@ -43,6 +43,7 @@ class AddQuestion extends React.Component {
         question: "",
         answer: ""
       });
+      navigation.goBack();
     });
   };
 
@@ -51,13 +52,13 @@ class AddQuestion extends React.Component {
 
     return (
       <View style={style.container}>
-        <Text style={{ fontSize: 16, fontWeight: "bold" }}>Question </Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>Add Question </Text>
         <TextInput
           value={question}
           style={style.input}
           onChangeText={question => this.setState({ question })}
         />
-        <Text style={{ fontSize: 16, fontWeight: "bold" }}>Answer </Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>The Answer </Text>
         <TextInput
           value={answer}
           style={style.input}
