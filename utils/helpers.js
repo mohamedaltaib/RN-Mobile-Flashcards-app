@@ -1,7 +1,6 @@
 import { AsyncStorage } from "react-native";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
-import Constants from "expo-constants";
 
 const NOTIFICATION_KEY = "FlashcardsApp:notifications";
 

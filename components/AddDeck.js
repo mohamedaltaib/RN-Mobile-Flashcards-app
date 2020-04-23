@@ -17,7 +17,6 @@ class AddDeck extends Component {
   };
 
   updateText = text => {
-    console.log(text);
     this.setState({ text });
   };
 
