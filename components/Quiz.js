@@ -9,6 +9,7 @@ import {
   blue,
   black
 } from "../utils/colors";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 class Quiz extends React.Component {
   state = {
@@ -24,6 +25,25 @@ class Quiz extends React.Component {
       correctAnswers: correctAnswers + 1,
       showAnswer: false
     });
+    this.checkCompleteQiz();
+  };
+
+  //this function to reset the local notification after confirming that
+  // all the questions has been answerd.
+  checkCompleteQiz = () => {
+    const { questions } = this.props.route.params;
+    console.log(questions.length, this.state.questionIndex);
+    if (
+      questions.length !== 0 &&
+      questions.length - this.state.questionIndex === 1
+    ) {
+      clearLocalNotification().then(setLocalNotification);
+    }
+  };
+
+  onIncorrect = () => {
+    this.setState({ questionIndex: this.state.questionIndex + 1 });
+    this.checkCompleteQiz();
   };
 
   startQuiz = () => {
@@ -36,10 +56,6 @@ class Quiz extends React.Component {
 
   backToDeck = () => {
     this.props.navigation.goBack();
-  };
-
-  onIncorrect = () => {
-    this.setState({ questionIndex: this.state.questionIndex + 1 });
   };
 
   showAnswer = () => {

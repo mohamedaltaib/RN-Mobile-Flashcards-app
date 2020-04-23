@@ -37,8 +37,9 @@ class AddDeck extends Component {
 
     createDeck(deck).then(() => {
       dispatch(addDeck(deck));
-      this.setState({ text: "" });
-      navigation.navigate("Dec kList");
+      navigation.navigate("Deck View", {
+        title: title
+      });
     });
   };
 
@@ -52,6 +53,7 @@ class AddDeck extends Component {
           style={styles.input}
           onChangeText={text => this.updateText(text)}
           value={this.state.text}
+          placeholder="Enter title"
         ></TextInput>
         <TouchableOpacity
           title="Submit"

@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { createStackNavigator } from "@react-navigation/stack";
-import {
-  TouchableOpacity,
-  FlatList,
-  ScrollView
-} from "react-native-gesture-handler";
+import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 
 function Decks({ title, length }) {
   return (
@@ -37,9 +32,8 @@ function Decks({ title, length }) {
 
 class DeckList extends Component {
   render() {
-    const { decks } = this.props;
+    const { decks, navigation } = this.props;
     console.log(this.props);
-    const Stack = createStackNavigator();
     return (
       <View style={styles.container}>
         <View
@@ -69,7 +63,7 @@ class DeckList extends Component {
                     backgroundColor: "#d0c9f122"
                   }}
                   onPress={() =>
-                    this.props.navigation.navigate("Deck View", {
+                    navigation.navigate("Deck View", {
                       title: title
                     })
                   }

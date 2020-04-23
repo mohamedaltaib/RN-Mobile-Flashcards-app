@@ -24,7 +24,11 @@ function DeckStackScreen() {
       />
       <DeckStack.Screen name="Deck View" component={DeckView} />
       <DeckStack.Screen name="Add Card" component={AddQuestion} />
-      <DeckStack.Screen name="Quiz" component={Quiz} />
+      <DeckStack.Screen
+        name="Quiz"
+        component={Quiz}
+        options={{ navigation: {} }}
+      />
     </DeckStack.Navigator>
   );
 }
