@@ -25,7 +25,8 @@ function Decks({ title, length }) {
           height: 20,
           backgroundColor: "#e332",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
+          marginRight: 15
         }}
       >
         <Text style={{ alignSelf: "center", fontWeight: "400" }}>{length}</Text>
@@ -45,11 +46,14 @@ class DeckList extends Component {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            padding: 15
+            padding: 15,
+            marginBottom: 5
           }}
         >
-          <Text>Title </Text>
-          <Text>Cards </Text>
+          <Text style={{ paddingLeft: 15, fontSize: 16, fontWeight: "bold" }}>
+            Title{" "}
+          </Text>
+          <Text style={{ fontSize: 16, fontWeight: "bold" }}>Cards </Text>
         </View>
 
         <ScrollView style={[styles.container]}>
