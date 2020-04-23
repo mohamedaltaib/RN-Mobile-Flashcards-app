@@ -34,17 +34,14 @@ export function setLocalNotification() {
             tomorrow.setHours(12);
             tomorrow.setMinutes(0);
 
-            try {
-              Notifications.scheduleLocalNotificationAsync(
-                createNotification(),
-                {
-                  time: tomorrow,
-                  repeat: "day"
-                }
-              );
-            } catch (error) {
-              console.log(error);
-            }
+            Notifications.scheduleLocalNotificationAsync(createNotification(), {
+              time: tomorrow,
+              repeat: "day"
+            })
+              .then(rus => {
+                console.log(rus);
+              })
+              .catch(err => console.log(err));
 
             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
           }

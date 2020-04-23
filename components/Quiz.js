@@ -32,7 +32,6 @@ class Quiz extends React.Component {
   // all the questions has been answerd.
   checkCompleteQiz = () => {
     const { questions } = this.props.route.params;
-    console.log(questions.length, this.state.questionIndex);
     if (
       questions.length !== 0 &&
       questions.length - this.state.questionIndex === 1
